@@ -12,7 +12,16 @@ export interface Props {
   rating?: string;
   runtime?: string;
 }
-const Movie = ({ isDetail, id, title, summary, genres, coverImg, rating, runtime }: Props) => {
+const Movie = ({
+  isDetail,
+  id,
+  title,
+  summary,
+  genres,
+  coverImg,
+  rating,
+  runtime,
+}: Props) => {
   return (
     <S.Movie key={id}>
       <div>
