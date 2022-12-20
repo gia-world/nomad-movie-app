@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Movie from "../components/Movie";
 import * as S from "../styles/index.style";
+import { MovieP } from "../types/type";
 
-const Nomad = () => {
+const Home = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   // console.log(typeof movies, "loading:", loading, movies);
@@ -28,13 +29,14 @@ const Nomad = () => {
       ) : (
         <S.movies>
           {movies.map(
-            (it: {
-              id: string;
-              title: string;
-              summary: string;
-              genres: Array<String>;
-              medium_cover_image: string;
-            }) => (
+            // (it: {
+            //   id: string;
+            //   title: string;
+            //   summary: string;
+            //   genres: Array<String>;
+            //   medium_cover_image: string;
+            // }) => (
+              (it:Partial<MovieP> )=>(
               <Movie
                 key={it.id}
                 id={it.id}
@@ -51,4 +53,4 @@ const Nomad = () => {
   );
 };
 
-export default Nomad;
+export default Home;

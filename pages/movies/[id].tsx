@@ -1,21 +1,15 @@
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import Movie from "../../components/Movie";
 import * as S from "../../styles/index.style";
+import { MovieP } from "../../types/type";
 
-interface iDetail {
-  id?: string;
-  title?: string;
-  description_full?: string;
-  genres?: Array<String>;
-  medium_cover_image?: string;
-  isDetail?: boolean;
-  title_long?: string;
-  rating?: string;
-  runtime?: string;
+
+interface Props{
+  movie: MovieP
 }
 const getMovie = async (id: string) => {
   const json = await (
@@ -23,7 +17,7 @@ const getMovie = async (id: string) => {
   ).json();
   return json.data.movie;
 };
-export default function Detail({ movie }: any) {
+export default function Detail({ movie }:Props) {
   // const router = useRouter();
   // const id = router.query.params;
   // const [loading, setLoading] = useState(true);
@@ -34,6 +28,8 @@ export default function Detail({ movie }: any) {
   //     getMovie();
   //   }
   // }, [id]);
+  console.log(movie)
+
   return (
     <Layout>
       {/* {loading ? (
@@ -59,7 +55,7 @@ export default function Detail({ movie }: any) {
       )} */}
 
       <>
-        <h2>{movie.title_long}</h2>
+      <h2>{movie&& movie.title_long}</h2>
         {movie && (
           <Movie
             isDetail={true}
@@ -78,7 +74,15 @@ export default function Detail({ movie }: any) {
     </Layout>
   );
 }
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true // false or 'blocking'
+  };
+}
+
+export async function getStaticProps(context: GetStaticPropsContext) {
   const id = context.params!.id as string;
   const movie = await getMovie(id);
   console.log("--------------------", id);
@@ -86,3 +90,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: { movie }, // will be passed to the page component as props
   };
 }
+
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   const id = context.params!.id as string;
+//   const movie = await getMovie(id);
+//   console.log("--------------------", id);
+//   return {
+//     props: { movie }, // will be passed to the page component as props
+//   };
+// }

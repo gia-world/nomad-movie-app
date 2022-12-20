@@ -1,17 +1,8 @@
 import Link from "next/link";
 import React from "react";
+import { MovieP } from "../types/type";
 import * as S from "./Movie.style";
 
-export interface Props {
-  id?: string;
-  title?: string;
-  summary?: string;
-  genres?: Array<String>;
-  coverImg?: string;
-  isDetail?: boolean;
-  rating?: string;
-  runtime?: string;
-}
 const Movie = ({
   isDetail,
   id,
@@ -21,7 +12,7 @@ const Movie = ({
   coverImg,
   rating,
   runtime,
-}: Props) => {
+}: Partial<MovieP>) => {
   return (
     <S.Movie key={id}>
       <div>
