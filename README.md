@@ -3,3 +3,6 @@
 
 ## Stats
 React.js / Next.js / TypeScript / styled component
+
+## Deployed Link
+https://nomad-movie-app.vercel.app/
